@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'common/index.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,8 +26,21 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+
+        
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
+      // 路由
+      // initialRoute: "/",
+      // getPages: RoutePages.list,
+
+
+            // 路由
+      initialRoute: RouteNames.systemSplash,
+      getPages: RoutePages.list,
+      navigatorObservers: [RoutePages.observer],
+
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

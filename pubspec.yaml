@@ -38,6 +38,8 @@ dependencies:
 
   # getX框架
   get: ^4.6.5
+  # 全局管理，用于存放系统配置变量
+  package_info_plus: ^4.0.0
 
 dev_dependencies:
   flutter_test:

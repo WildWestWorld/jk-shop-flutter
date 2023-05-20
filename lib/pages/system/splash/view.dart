@@ -10,7 +10,7 @@ class SplashPage extends GetView<SplashController> {
   // 主视图
   Widget _buildView() {
     return  Center(
-      child: Text("SplashPage - ${ConfigService.instance.version}"),
+      child: Text("SplashPage - ${ConfigService.to.version}"),
     );
   }
 

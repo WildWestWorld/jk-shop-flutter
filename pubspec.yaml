@@ -46,6 +46,7 @@ dependencies:
   package_info_plus: ^4.0.0
   # localStorage
   shared_preferences: ^2.1.1
+  dio: ^5.1.2
 
 dev_dependencies:
   flutter_test:

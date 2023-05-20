@@ -4,3 +4,6 @@ library services;
 
 // config 平台配置文件
 export 'config.dart';
+
+// Axios
+export 'apiOrigin.dart';

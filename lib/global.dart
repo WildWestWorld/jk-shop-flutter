@@ -29,15 +29,16 @@ class Global {
 //  因为 Get.putAsync<ConfigService>() 方法返回的是一个 Future 对象，而且它是异步执行的，所以需要使用 await 关键字等待它执行完成。
 //  由于 Future.wait() 方法可能会等待多个异步操作，因此我们可以将它们放入一个 List 中，以便在需要的时候等待它们全部完成
 
-
-
     await Future.wait([
       //初始化包管理 服务
       Get.putAsync<ConfigService>(() async {
         return await ConfigService().init();
       }),
-     //初始化localStorage
-     Storage().init(),
-    ]).whenComplete(() {});
+      //初始化localStorage
+      Storage().init(),
+    ]).whenComplete(() {
+      //初始化Axios 服务
+      Get.put<ApiOrginService>(ApiOrginService());
+    });
   }
 }

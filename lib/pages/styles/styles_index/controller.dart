@@ -49,4 +49,11 @@ class StylesIndexController extends GetxController {
     // 更新View
     update(["styles_index"]);
   }
+
+
+  // 切换主题
+  onThemeSelected() async {
+    await ConfigService.to.switchThemeModel();
+    update(["styles_index"]);
+  }
 }

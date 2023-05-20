@@ -30,12 +30,18 @@ class ConfigService extends GetxService {
   // 获取到_platform里面的版本
   String get version => _platform?.version ?? '-';
 
+  // 主题色
+  final RxBool _isDarkModel = Get.isDarkMode.obs;
+  bool get isDarkModel => _isDarkModel.value;
+
   // 初始化
   Future<ConfigService> init() async {
     // 获取系统依赖包的创建的实例
     await getPlatform();
     // 初始化语言包
     initLocale();
+    // 初始化主题
+    initTheme();
 
     return this;
   }
@@ -45,14 +51,11 @@ class ConfigService extends GetxService {
     _platform = await PackageInfo.fromPlatform();
   }
 
-
-
 // initLocale，主要用于设置应用程序的语言环境
 // 这个函数首先尝试从本地存储中读取所存储的语言代码（langCode）。
 // 如果本地存储中没有存储语言代码，则默认使用英语作为应用程序的语言环境。
 // 如果本地存储中有语言代码，则在翻译类（Translation class）中指定的支持的语言环境列表中查找匹配该代码的语言环境。
 // 如果找到匹配项，则设置应用程序的语言环境为匹配项的语言环境。如果未找到匹配项，则保留默认的英语语言环境。
-
 
   // 初始语言
   void initLocale() {
@@ -73,6 +76,22 @@ class ConfigService extends GetxService {
     Storage().setString(Constants.storageLanguageCode, value.languageCode);
   }
 
+  // 切换 theme
+  Future<void> switchThemeModel() async {
+    _isDarkModel.value = !_isDarkModel.value;
+    Get.changeTheme(
+      _isDarkModel.value == true ? AppTheme.dark : AppTheme.light,
+    );
+    await Storage().setString(Constants.storageThemeCode,
+        _isDarkModel.value == true ? "dark" : "light");
+  }
 
-
+  // 初始 theme
+  void initTheme() {
+    var themeCode = Storage().getString(Constants.storageThemeCode);
+    _isDarkModel.value = themeCode == "dark" ? true : false;
+    Get.changeTheme(
+      themeCode == "dark" ? AppTheme.dark : AppTheme.light,
+    );
+  }
 }

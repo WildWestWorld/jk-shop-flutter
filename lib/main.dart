@@ -20,10 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      // ),
+      // 样式
+      theme: ConfigService.to.isDarkModel ? AppTheme.dark : AppTheme.light,
       // 路由
       initialRoute: RouteNames.stylesStylesIndex,
       getPages: RoutePages.list,

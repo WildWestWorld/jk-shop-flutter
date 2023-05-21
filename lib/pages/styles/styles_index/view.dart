@@ -20,6 +20,10 @@ class StylesIndexPage extends GetView<StylesIndexController> {
         onTap: controller.onThemeSelected,
         title: Text("主题 : ${ConfigService.to.isDarkModel ? "Dark" : "Light"}"),
       ),
+      ListTile(
+        onTap: () => Get.toNamed(RouteNames.stylesText),
+        title: const Text("Text 文本"),
+      ),
     ]);
   }
 
@@ -31,7 +35,6 @@ class StylesIndexPage extends GetView<StylesIndexController> {
       builder: (_) {
         return Scaffold(
           // appBar: AppBar(title: const Text("styles_index")),
-      
 
           // tr会自动去转换对应的版本的文字
           // LocaleKeys.XXX 其实是设定的键名

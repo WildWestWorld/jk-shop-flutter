@@ -31,6 +31,7 @@ class StylesIndexPage extends GetView<StylesIndexController> {
       builder: (_) {
         return Scaffold(
           // appBar: AppBar(title: const Text("styles_index")),
+      
 
           // tr会自动去转换对应的版本的文字
           // LocaleKeys.XXX 其实是设定的键名

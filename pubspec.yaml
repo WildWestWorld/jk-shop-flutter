@@ -43,15 +43,20 @@ dependencies:
   get: ^4.6.5
   # 用于获取软件的信息管理，用于存放系统配置变量
 
-  # android
+  # !!package_info_plus !!注意事项 android
   #  minSdkVersion设置 16
   # 删除 namespace 'dev.fluttercommunity.plus.packageinfo'
-
   package_info_plus: ^4.0.0
   # localStorage
   shared_preferences: ^2.1.1
   # Axios
   dio: ^5.1.2
+  #  加载svg
+  flutter_svg: ^2.0.5
+  # 文字右上方的小圆标
+  badges: ^3.1.1
+  # 图片显示组件
+  extended_image: ^7.0.2
 
 dev_dependencies:
   flutter_test:

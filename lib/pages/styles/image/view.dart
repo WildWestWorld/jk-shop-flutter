@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jk_shop/common/index.dart';
 
 import 'index.dart';
 
 class ImagePage extends GetView<ImageController> {
   const ImagePage({Key? key}) : super(key: key);
 
-  // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("ImagePage"),
+    return ListView(
+      children: [
+        const ListTile(
+          leading: JKImage.url(
+              "https://ducafecat.oss-cn-beijing.aliyuncs.com/wp-content/uploads/2022/02/90bb74497f090c48e1df1ec1ca31fb11-450x450.jpg"),
+          title: JKText.body1("ImageWidget.url"),
+        ),
+        ListTile(
+          leading: JKImage.asset(AssetsImages.pPaypalPng),
+          title: const JKText.body1("ImageWidget.asset"),
+        ),
+      ],
     );
   }
 

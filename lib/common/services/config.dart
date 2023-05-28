@@ -34,6 +34,14 @@ class ConfigService extends GetxService {
   final RxBool _isDarkModel = Get.isDarkMode.obs;
   bool get isDarkModel => _isDarkModel.value;
 
+// 是否首次打开
+  bool get isAlreadyOpen => Storage().getBool(Constants.storageAlreadyOpen);
+
+// 标记已打开app
+  void setAlreadyOpen() {
+    Storage().setBool(Constants.storageAlreadyOpen, true);
+  }
+
   // 初始化
   Future<ConfigService> init() async {
     // 获取系统依赖包的创建的实例

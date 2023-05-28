@@ -1,8 +1,8 @@
-
 import 'dart:io';
 
-import 'package:extended_image/extended_image.dart' ;
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../index.dart';
@@ -132,9 +132,12 @@ class JKImage extends StatelessWidget {
           loadStateChanged: (state) => _buildLoadState(context, state),
         );
         break;
+
       // case ImageWidgetType.file:
+      //   final file = File(url);
+      //   if (!file.existsSync()) break;
       //   image = ExtendedImage.file(
-      //     File(url),
+      //     file,
       //     width: width,
       //     height: height,
       //     fit: fit,

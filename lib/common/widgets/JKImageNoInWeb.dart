@@ -1,7 +1,8 @@
 
-import 'dart:io';
 
-import 'package:extended_image/extended_image.dart' ;
+import 'package:extended_image/extended_image.dart';
+import 'package:extended_image_library/extended_image_library.dart' show File;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

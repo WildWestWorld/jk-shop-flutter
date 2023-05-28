@@ -56,7 +56,16 @@ dependencies:
   # 文字右上方的小圆标
   badges: ^3.1.1
   # 图片显示组件
-  extended_image: ^7.0.2
+  extended_image: ^8.0.1
+  # 图片显示辅助包(解决web端File问题)
+  extended_image_library: ^3.4.2
+  # 屏幕自适应(rem)
+  flutter_screenutil: ^5.8.0
+  # 启动图
+  flutter_native_splash: ^2.3.0
+  # 轮播图
+  carousel_slider: ^4.2.1
+
 
 dev_dependencies:
   flutter_test:
@@ -68,12 +77,18 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  # 更换APP图像
-  flutter_launcher_icons_maker: ^0.10.2
+  # 更换APP应用图像
+  flutter_launcher_icons: ^0.13.1
 
-# 配置flutter_launcher_icons_maker
+# flutter_native_splash
+# 配置启动图
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/icons/launcher_android.png"
+
+# 配置flutter_launcher_icons
 # app 图标
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/icons/launcher_ios.png"

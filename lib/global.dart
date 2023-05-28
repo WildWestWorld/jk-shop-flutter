@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 import 'common/index.dart';
@@ -6,7 +7,10 @@ import 'common/index.dart';
 class Global {
   static Future<void> init() async {
     // FLUTTER与原生的接口 进行初始化避免报错，！必须放前面
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+    //依赖启动图 flutter_native_splash 插件，这样写是为了清除启动图图片
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
     //   它使用 Get.putAsync() 方法将 ConfigService 类以异步的方式放到 Get 包内存中，以便获取单例实例。
     //   使用 await 等待该操作完成之后，可在 whenComplete() 方法中执行一些额外的逻辑。
@@ -29,13 +33,14 @@ class Global {
 //  因为 Get.putAsync<ConfigService>() 方法返回的是一个 Future 对象，而且它是异步执行的，所以需要使用 await 关键字等待它执行完成。
 //  由于 Future.wait() 方法可能会等待多个异步操作，因此我们可以将它们放入一个 List 中，以便在需要的时候等待它们全部完成
 
+    //初始化localStorage
+    await Storage().init();
+
     await Future.wait([
       //初始化包管理 服务
       Get.putAsync<ConfigService>(() async {
         return await ConfigService().init();
       }),
-      //初始化localStorage
-      Storage().init(),
     ]).whenComplete(() {
       //初始化Axios 服务
       Get.put<ApiOrginService>(ApiOrginService());

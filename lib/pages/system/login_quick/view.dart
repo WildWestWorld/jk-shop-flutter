@@ -86,7 +86,7 @@ class LoginQuickPage extends GetView<LoginQuickController> {
       ]
           .toColumn(crossAxisAlignment: CrossAxisAlignment.start)
           .paddingAll(20)
-          .card(color: Colors.white,borderRadius: 35),
+          .card(color: Colors.white, borderRadius: 35),
     ]
         .toColumn(mainAxisAlignment: MainAxisAlignment.center)
         .paddingHorizontal(15);

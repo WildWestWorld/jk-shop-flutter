@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -47,6 +48,9 @@ class MyApp extends StatelessWidget {
 
             // 屏幕自适应工具的builder
             builder: (context, widget) {
+              // EasyLoading 初始化
+              widget = EasyLoading.init()(context, widget);
+
               // 不随系统字体缩放比例
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -55,7 +59,6 @@ class MyApp extends StatelessWidget {
             },
 
             debugShowCheckedModeBanner: false,
-
           );
         });
   }

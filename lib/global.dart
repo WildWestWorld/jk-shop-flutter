@@ -36,6 +36,9 @@ class Global {
     //初始化localStorage
     await Storage().init();
 
+    // 初始化EasyLoading
+    Loading();
+
     await Future.wait([
       //初始化包管理 服务
       Get.putAsync<ConfigService>(() async {
@@ -44,6 +47,7 @@ class Global {
     ]).whenComplete(() {
       //初始化Axios 服务
       Get.put<ApiOrginService>(ApiOrginService());
+      Get.put<UserService>(UserService());
     });
   }
 }

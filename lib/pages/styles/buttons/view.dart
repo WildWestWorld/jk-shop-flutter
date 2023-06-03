@@ -92,7 +92,6 @@ class ButtonsPage extends GetView<ButtonsController> {
       SizedBox(
           width: 100,
           height: 50,
-
           child: JKButton.iconTextOutlined(
             JKIcon.svg(
               AssetsSvgs.cHomeSvg,

@@ -1,15 +1,144 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jk_shop/common/index.dart';
+import 'package:validatorless/validatorless.dart';
 
 import 'index.dart';
 
 class RegisterPage extends GetView<RegisterController> {
   const RegisterPage({Key? key}) : super(key: key);
 
-  // 主视图
+  // 按钮
+  Widget _buildBtnSignUp() {
+    return JKButton.primary(
+      LocaleKeys.loginSignUp.tr,
+      onTap: controller.onSignUp,
+    ).paddingBottom(AppSpace.listRow);
+  }
+
+  // 提示
+  Widget _buildTips() {
+    return <Widget>[
+      // 提示
+      JKText.body2(LocaleKeys.registerHaveAccount.tr),
+      // 登录文字按钮
+      JKButton.text(
+        LocaleKeys.loginSignIn.tr,
+        onTap: controller.onSignIn,
+        textSize: 12,
+        textColor: AppColors.primary,
+      )
+    ].toRow(
+      mainAxisAlignment: MainAxisAlignment.center,
+    );
+  }
+
+  // 表单页
+  Widget _buildForm() {
+    return Form(
+      key: controller.formKey, // !重要，没有他无法拿到表单数据!设置globalKey，用于后面获取FormState
+
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: <Widget>[
+        // username
+        JKTextForm(
+          autofocus: true,
+          controller: controller.userNameController,
+          labelText: LocaleKeys.registerFormName.tr,
+          validator: Validatorless.multiple([
+            Validatorless.required(LocaleKeys.validatorRequired.tr),
+            Validatorless.min(
+                3, LocaleKeys.validatorMin.trParams({"size": "3"})),
+            Validatorless.max(
+                20, LocaleKeys.validatorMax.trParams({"size": "20"})),
+          ]),
+        ),
+
+        // email
+        JKTextForm(
+          autofocus: true,
+          keyboardType: TextInputType.emailAddress,
+          controller: controller.emailController,
+          labelText: LocaleKeys.registerFormEmail.tr,
+          validator: Validatorless.multiple([
+            Validatorless.required(LocaleKeys.validatorRequired.tr),
+            Validatorless.email(LocaleKeys.validatorEmail.tr),
+          ]),
+        ),
+
+        // first name
+        JKTextForm(
+          autofocus: true,
+          controller: controller.firstNameController,
+          labelText: LocaleKeys.registerFormFirstName.tr,
+          validator: Validatorless.multiple([
+            Validatorless.required(LocaleKeys.validatorRequired.tr),
+            Validatorless.min(
+                3, LocaleKeys.validatorMin.trParams({"size": "3"})),
+            Validatorless.max(
+                20, LocaleKeys.validatorMax.trParams({"size": "20"})),
+          ]),
+        ),
+
+        // last name
+        JKTextForm(
+          autofocus: true,
+          controller: controller.lastNameController,
+          labelText: LocaleKeys.registerFormLastName.tr,
+          validator: Validatorless.multiple([
+            Validatorless.required(LocaleKeys.validatorRequired.tr),
+            Validatorless.min(
+                3, LocaleKeys.validatorMin.trParams({"size": "3"})),
+            Validatorless.max(
+                20, LocaleKeys.validatorMax.trParams({"size": "20"})),
+          ]),
+        ),
+
+        // password
+        JKTextForm(
+          controller: controller.passwordController,
+          labelText: LocaleKeys.registerFormPassword.tr,
+          isObscure: true,
+          validator: Validatorless.multiple([
+            Validatorless.required(LocaleKeys.validatorRequired.tr),
+            Validators.password(
+              8,
+              18,
+              LocaleKeys.validatorPassword.trParams(
+                {"min": "8", "max": "18"},
+              ),
+            ),
+          ]),
+        ).paddingBottom(50),
+
+        // 注册按钮
+        _buildBtnSignUp(),
+
+        // 提示文字
+        _buildTips(),
+
+        //
+      ].toColumn(),
+    ).paddingAll(AppSpace.card);
+  }
+
+  // 内容页
   Widget _buildView() {
-    return const Center(
-      child: Text("RegisterPage"),
+    return SingleChildScrollView(
+      child: <Widget>[
+        // 头部标题
+        PageTitleWidget(
+          title: LocaleKeys.registerTitle.tr,
+          desc: LocaleKeys.registerDesc.tr,
+        ),
+
+        // 表单
+        _buildForm().card(),
+      ]
+          .toColumn(
+            crossAxisAlignment: CrossAxisAlignment.start,
+          )
+          .paddingHorizontal(AppSpace.page),
     );
   }
 

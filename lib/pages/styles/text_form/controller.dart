@@ -1,7 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TextFormController extends GetxController {
   TextFormController();
+  GlobalKey formKey = GlobalKey<FormState>();
+
+  TextEditingController unameController =
+      TextEditingController(text: "ducafecat");
+  TextEditingController pwdController = TextEditingController(text: "123456");
 
   _initData() {
     update(["text_form"]);
@@ -25,8 +31,10 @@ class TextFormController extends GetxController {
   //   super.onClose();
   // }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+    unameController.dispose();
+    pwdController.dispose();
+  }
 }

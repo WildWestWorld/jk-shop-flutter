@@ -12,4 +12,8 @@ class Constants {
 
   // wp 服务器
   static const wpApiBaseUrl = 'https://wpapi.ducafecat.tech';
+
+  // 用户登录
+  static const storageToken = 'token'; // 登录成功后 token
+  static const storageProfile = 'profile'; // 用户资料缓存
 }

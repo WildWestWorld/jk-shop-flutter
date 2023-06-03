@@ -18,11 +18,10 @@ class Translation extends Translations {
     Locale('zh', 'CN'),
   ];
 
-
 // 用于修改组件中的文本信息
 
-// - GlobalMaterialLocalizations.delegate：用于在Material Design中本地化日期、时间、文本等。 
-// - GlobalWidgetsLocalizations.delegate：用于在应用内本地化常见的文本，比如提示框、按钮等。 
+// - GlobalMaterialLocalizations.delegate：用于在Material Design中本地化日期、时间、文本等。
+// - GlobalWidgetsLocalizations.delegate：用于在应用内本地化常见的文本，比如提示框、按钮等。
 // - GlobalCupertinoLocalizations.delegate：用于在Cupertino（iOS）设计中本地化日期、时间、文本等。
 
   // 代理
@@ -36,5 +35,5 @@ class Translation extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en': localeEn,
         'zh': localeZh,
-      };  
+      };
 }

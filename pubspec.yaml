@@ -69,10 +69,10 @@ dependencies:
   validatorless: ^1.2.3
   # 用于手机验证码输入
   pinput: ^2.2.31
-# 加载框和toast显示
+  # 加载框和toast显示
   flutter_easyloading: ^3.0.5
-
-
+  # 用于密码传输的加密(AES)
+  encrypt: ^5.0.1
 
 dev_dependencies:
   flutter_test:

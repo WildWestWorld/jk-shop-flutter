@@ -7,3 +7,4 @@ export './page_title.dart';
 export './pin_input.dart';
 export './carousel.dart';
 export './category_item.dart';
+export './product_item.dart';

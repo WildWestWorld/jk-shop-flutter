@@ -11,9 +11,10 @@ class RoutePages {
   // 列表
   static List<GetPage> list = [
     GetPage(
-      name: RouteNames.main,
-      page: () => const MainPage(),
-    ),
+        name: RouteNames.main,
+        page: () => const MainPage(),
+        // binding用于懒加载
+        binding: MainBinding()),
     GetPage(
       name: RouteNames.cartApplyPromoCode,
       page: () => const ApplyPromoCodePage(),

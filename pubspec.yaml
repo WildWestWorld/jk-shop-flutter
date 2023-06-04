@@ -73,6 +73,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   # 用于密码传输的加密(AES)
   encrypt: ^5.0.1
+  # 下拉刷新
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,13 @@ import 'package:jk_shop/common/index.dart';
 class HomeController extends GetxController {
   HomeController();
 
+  // 分类导航数据
+  List<CategoryModel> categoryItems = [];
+  // 推荐商品列表数据
+  List<ProductModel> flashShellProductList = [];
+  // 最新商品列表数据
+  List<ProductModel> newProductProductList = [];
+
   // Banner 当前位置
   int bannerCurrentIndex = 0;
 
@@ -20,6 +27,14 @@ class HomeController extends GetxController {
     // 首页
     // banner
     bannerItems = await SystemApi.banners();
+
+    // 分类
+    categoryItems = await ProductApi.categories();
+    // 推荐商品
+    flashShellProductList =
+        await ProductApi.products(ProductsReq(featured: true));
+    // 新商品
+    newProductProductList = await ProductApi.products(ProductsReq());
 
     update(["home"]);
   }

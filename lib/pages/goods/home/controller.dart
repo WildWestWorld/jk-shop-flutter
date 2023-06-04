@@ -23,6 +23,9 @@ class HomeController extends GetxController {
     update(["home_banner"]);
   }
 
+  // 分类点击事件
+  void onCategoryTap(int categoryId) {}
+
   _initData() async {
     // 首页
     // banner

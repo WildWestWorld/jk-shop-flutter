@@ -17,6 +17,23 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.dark, // appBar 暗色 , 和主题色相反
       //样式正好和我们的 app 样式相反，这样才能反显文字。
+
+      //我们这边调整了 appBar 的透明、图标颜色、标题样式
+
+      // 背景透明
+      backgroundColor: Colors.transparent,
+      // 取消阴影
+      elevation: 0,
+      // 图标样式
+      iconTheme: IconThemeData(
+        color: Color(0xFF5F84FF),
+      ),
+      // 标题
+      titleTextStyle: TextStyle(
+        color: Color(0xFF4D4D4D),
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+      ),
     ),
   );
 

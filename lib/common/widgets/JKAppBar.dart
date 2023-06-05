@@ -16,12 +16,12 @@ class NavigationItemModel {
 }
 
 /// 导航栏
-class JKNavigationBar extends StatelessWidget {
+class JKAppBar extends StatelessWidget {
   final int currentIndex;
   final List<NavigationItemModel> items;
   final Function(int) onTap;
 
-  const JKNavigationBar({
+  const JKAppBar({
     Key? key,
     required this.currentIndex,
     required this.items,

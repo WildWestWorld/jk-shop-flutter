@@ -33,7 +33,7 @@ class MainPage extends GetView<MainController> {
         bottomNavigationBar: GetBuilder<MainController>(
           id: 'navigation',
           builder: (controller) {
-            return JKNavigationBar(
+            return JKAppBar(
               currentIndex: controller.currentIndex,
               items: [
                 NavigationItemModel(

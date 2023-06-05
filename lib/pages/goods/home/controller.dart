@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:jk_shop/common/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -121,7 +123,52 @@ class HomeController extends GetxController {
     // 新商品
     newProductProductList = await ProductApi.products(ProductsReq());
 
+    // 保存离线数据
+    Storage().setJson(Constants.storageHomeBanner, bannerItems);
+    Storage().setJson(Constants.storageHomeCategories, categoryItems);
+    Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
+    Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
+
     update(["home"]);
+  }
+
+  // 读取缓存
+  Future<void> _loadCacheData() async {
+    var stringBanner = Storage().getString(Constants.storageHomeBanner);
+    var stringCategories = Storage().getString(Constants.storageHomeCategories);
+    var stringFlashSell = Storage().getString(Constants.storageHomeFlashSell);
+    var stringNewSell = Storage().getString(Constants.storageHomeNewSell);
+
+    bannerItems = stringBanner != ""
+        ? jsonDecode(stringBanner).map<KeyValueModel>((item) {
+            return KeyValueModel.fromJson(item);
+          }).toList()
+        : [];
+
+    categoryItems = stringCategories != ""
+        ? jsonDecode(stringCategories).map<CategoryModel>((item) {
+            return CategoryModel.fromJson(item);
+          }).toList()
+        : [];
+
+    flashShellProductList = stringFlashSell != ""
+        ? jsonDecode(stringFlashSell).map<ProductModel>((item) {
+            return ProductModel.fromJson(item);
+          }).toList()
+        : [];
+
+    newProductProductList = stringNewSell != ""
+        ? jsonDecode(stringNewSell).map<ProductModel>((item) {
+            return ProductModel.fromJson(item);
+          }).toList()
+        : [];
+
+    if (bannerItems.isNotEmpty ||
+        categoryItems.isNotEmpty ||
+        flashShellProductList.isNotEmpty ||
+        newProductProductList.isNotEmpty) {
+      update(["home"]);
+    }
   }
 
   void onTap() {}
@@ -129,10 +176,13 @@ class HomeController extends GetxController {
   // 导航点击事件
   void onAppBarTap() {}
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+
+    // 读取缓存应该先于下面的 加载数据 所以用init
+    _loadCacheData();
+  }
 
   @override
   void onReady() {

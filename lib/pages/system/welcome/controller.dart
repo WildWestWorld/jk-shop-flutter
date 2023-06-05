@@ -59,10 +59,10 @@ class WelcomeController extends GetxController {
   // }
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
     // 设置 是否为第一次打开  为true
-    ConfigService().setAlreadyOpen();
+    await ConfigService().setAlreadyOpen();
     _initData();
   }
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 // 这是一个 Storage 类实现了 kv 离线存储，它是基于 shared_preferences 包实现的。其主要作用是提供常见的存储操作方法，
@@ -96,6 +98,11 @@ class Storage {
   Future<void> init() async {
     // SharedPreferences.getInstance 是SharedPreferences自带的初始化方法
     _prefs = await SharedPreferences.getInstance();
+  }
+
+// 本地离线 json 数据格式
+  Future<bool> setJson(String key, Object value) async {
+    return await _prefs.setString(key, jsonEncode(value));
   }
 
   Future<bool> setString(String key, String value) async {

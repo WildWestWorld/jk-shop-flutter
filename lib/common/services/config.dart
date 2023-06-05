@@ -38,8 +38,8 @@ class ConfigService extends GetxService {
   bool get isAlreadyOpen => Storage().getBool(Constants.storageAlreadyOpen);
 
 // 标记已打开app
-  void setAlreadyOpen() {
-    Storage().setBool(Constants.storageAlreadyOpen, true);
+  Future<void> setAlreadyOpen() async {
+    await Storage().setBool(Constants.storageAlreadyOpen, true);
   }
 
   // 初始化

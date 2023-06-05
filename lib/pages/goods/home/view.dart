@@ -182,8 +182,8 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      // init: HomeController(),
-      init: Get.find<HomeController>(),
+      init: HomeController(),
+      // init: Get.find<HomeController>(),
 
       id: "home",
       builder: (_) {

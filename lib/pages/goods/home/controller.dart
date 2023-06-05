@@ -105,7 +105,14 @@ class HomeController extends GetxController {
   void onCategoryTap(int categoryId) {}
 
   // ALL 点击事件
-  void onAllTap(bool featured) {}
+  void onAllTap(bool featured) {
+    Get.toNamed(
+      RouteNames.goodsProductList,
+      arguments: {
+        "featured": featured,
+      },
+    );
+  }
 
   _initData() async {
     // 模拟网络延迟 1 秒

@@ -7,3 +7,5 @@ export './JKImage.dart';
 export './JKButton.dart';
 export './JKInput.dart';
 export './JKTextForm.dart';
+export './JKAppBar.dart';
+export './JKNavgationBar.dart';

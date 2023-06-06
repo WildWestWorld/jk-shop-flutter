@@ -24,9 +24,4 @@ class ProductDetailsController extends GetxController {
   // void onClose() {
   //   super.onClose();
   // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
 }

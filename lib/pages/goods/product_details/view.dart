@@ -57,6 +57,9 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
             indicatorAlignment: MainAxisAlignment.start,
             // 指示器颜色
             indicatorColor: AppColors.highlight,
+
+            // 打开大图预览
+            onTap: controller.onGalleryTap,
           );
         }).backgroundColor(AppColors.surfaceVariant);
   }

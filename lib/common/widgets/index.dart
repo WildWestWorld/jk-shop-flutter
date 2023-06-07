@@ -9,3 +9,4 @@ export './JKInput.dart';
 export './JKTextForm.dart';
 export './JKAppBar.dart';
 export './JKNavgationBar.dart';
+export './JKIconText.dart';

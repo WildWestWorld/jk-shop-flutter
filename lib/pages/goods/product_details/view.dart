@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jk_shop/common/index.dart';
+import 'package:jk_shop/common/widgets/JKIconText.dart';
 
 import 'index.dart';
 
@@ -66,7 +67,37 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
 
   // 商品标题
   Widget _buildTitle() {
-    return Text("滚动图");
+    return <Widget>[
+      // 金额、打分、喜欢
+      <Widget>[
+        // 金额
+        JKText.title1(
+          "\$${controller.product?.price ?? 0}",
+        ).expanded(),
+        // 打分
+        const JKIconText(
+          iconData: Icons.star,
+          text: "4.5",
+        ).paddingRight(AppSpace.iconTextMedium),
+        // 喜欢
+        const JKIconText(
+          iconData: Icons.favorite,
+          text: "100+",
+        ),
+      ].toRow(),
+
+      // 次标题
+      JKText.body1(
+        controller.product?.shortDescription?.clearHtml ?? "-",
+      ),
+    ]
+        .toColumn(
+          // 左对齐
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // 垂直间距
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        )
+        .paddingAll(AppSpace.page);
   }
 
   // Tab 栏位

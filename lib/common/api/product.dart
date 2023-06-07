@@ -30,4 +30,12 @@ class ProductApi {
     }
     return products;
   }
+
+  /// 商品详情
+  static Future<ProductModel> productDetail(int? id) async {
+    var res = await ApiOrginService.to.get(
+      '/products/$id',
+    );
+    return ProductModel.fromJson(res.data);
+  }
 }

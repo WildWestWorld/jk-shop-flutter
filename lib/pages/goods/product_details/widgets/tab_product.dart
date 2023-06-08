@@ -49,6 +49,21 @@ class TabProductView extends GetView<ProductDetailsController> {
           ).paddingBottom(AppSpace.listRow * 2);
         },
       ),
+
+      // 运费说明
+      _buildTitle("Shipping Charge"),
+      <Widget>[
+        // 运费
+        const JKText.body1(
+          "\$12.10",
+          size: 18,
+          weight: FontWeight.bold,
+        ).paddingRight(AppSpace.listItem),
+        // 说明
+        const JKText.body2(
+          "by paperfly shipment",
+        ),
+      ].toRow(),
     ]
         .toColumn(crossAxisAlignment: CrossAxisAlignment.start)
         .paddingVertical(AppSpace.page);

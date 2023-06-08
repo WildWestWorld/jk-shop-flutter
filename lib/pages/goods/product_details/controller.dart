@@ -95,6 +95,12 @@ class ProductDetailsController extends GetxController
     // 初始化 tab 控制器
     tabController = TabController(length: 3, vsync: this);
 
+    // 监听 tab 切换
+    tabController.addListener(() {
+      tabIndex = tabController.index;
+      update(['product_tab']);
+    });
+
     update(["product_details"]);
   }
 

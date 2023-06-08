@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jk_shop/common/index.dart';
@@ -23,6 +25,11 @@ class ProductDetailsController extends GetxController
   // tab 控制器
   int tabIndex = 0;
 
+  // 颜色列表
+  List<KeyValueModel<AttributeModel>> colors = [];
+  // 选中颜色列表
+  List<String> colorKeys = [];
+
   // 拉取商品详情
   _loadProduct() async {
     // 商品详情
@@ -37,6 +44,20 @@ class ProductDetailsController extends GetxController
               ))
           .toList();
     }
+  }
+
+  // 读取缓存
+  _loadCache() async {
+    // 颜色列表
+    var stringColors =
+        Storage().getString(Constants.storageProductsAttributesColors);
+
+    colors = stringColors != ""
+        ? jsonDecode(stringColors).map<KeyValueModel<AttributeModel>>((item) {
+            var arrt = AttributeModel.fromJson(item);
+            return KeyValueModel(key: "${arrt.name}", value: arrt);
+          }).toList()
+        : [];
   }
 
   _initData() async {
@@ -70,10 +91,17 @@ class ProductDetailsController extends GetxController
 
   void onTap() {}
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  // 颜色选中
+  void onColorTap(List<String> keys) {
+    colorKeys = keys;
+    update(["product_colors"]);
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadCache();
+  }
 
   @override
   void onReady() {

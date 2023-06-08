@@ -137,6 +137,14 @@ class HomeController extends GetxController {
     // 新商品
     newProductProductList = await ProductApi.products(ProductsReq());
 
+    // 颜色
+    var attributeColors = await ProductApi.attributes(1);
+
+    // 保存离线数据
+    // 缓存颜色
+    Storage()
+        .setJson(Constants.storageProductsAttributesColors, attributeColors);
+
     // 保存离线数据
     Storage().setJson(Constants.storageProductsCategories, categoryItems);
 

@@ -30,4 +30,7 @@ class Constants {
   // 基础数据
   // 商品分类 离线
   static const storageProductsCategories = 'home_categories';
+
+  // 颜色定义
+  static const storageProductsAttributesColors = 'products_attributes_colors';
 }

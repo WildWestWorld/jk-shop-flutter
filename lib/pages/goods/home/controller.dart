@@ -29,6 +29,11 @@ class HomeController extends GetxController {
   // Banner 数据
   List<KeyValueModel> bannerItems = [];
 
+  // 尺寸列表
+  List<KeyValueModel<AttributeModel>> sizes = [];
+  // 选中尺寸列表
+  List<String> sizeKeys = [];
+
   /// 拉取数据
   /// isRefresh 是否是刷新
   Future<bool> _loadNewsSell(bool isRefresh) async {
@@ -139,11 +144,15 @@ class HomeController extends GetxController {
 
     // 颜色
     var attributeColors = await ProductApi.attributes(1);
+    // 尺寸
+    var attributeSizes = await ProductApi.attributes(2);
 
     // 保存离线数据
     // 缓存颜色
     Storage()
         .setJson(Constants.storageProductsAttributesColors, attributeColors);
+    // 尺寸定义
+    Storage().setJson(Constants.storageProductsAttributesSizes, attributeSizes);
 
     // 保存离线数据
     Storage().setJson(Constants.storageProductsCategories, categoryItems);

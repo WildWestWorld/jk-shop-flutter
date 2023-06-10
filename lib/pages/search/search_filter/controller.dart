@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -6,8 +7,6 @@ import 'package:jk_shop/common/index.dart';
 
 class SearchFilterController extends GetxController {
   SearchFilterController();
-  // 价格范围 0~1000
-  final List<double> priceRange = [100, 1000];
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -24,6 +23,14 @@ class SearchFilterController extends GetxController {
   // 排序选中
   KeyValueModel orderSelected =
       KeyValueModel(key: "rating", value: "Best Match");
+
+  // 价格范围 0~1000
+  final List<double> priceRange = [100, 1000];
+
+  // 尺寸列表
+  List<KeyValueModel<AttributeModel>> sizes = [];
+  // 选中尺寸列表
+  List<String> sizeKeys = [];
 
   _initData() {
     update(["search_filter"]);
@@ -58,10 +65,30 @@ class SearchFilterController extends GetxController {
     update(["filter_price_range"]);
   }
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  // 读取缓存
+  void _loadCache() async {
+    // 尺寸列表
+    {
+      String result =
+          Storage().getString(Constants.storageProductsAttributesSizes);
+      sizes = jsonDecode(result).map<KeyValueModel<AttributeModel>>((item) {
+        var arrt = AttributeModel.fromJson(item);
+        return KeyValueModel(key: "${arrt.name}", value: arrt);
+      }).toList();
+    }
+  }
+
+  // 尺寸选中
+  void onSizeTap(List<String> keys) {
+    sizeKeys = keys;
+    update(["filter_sizes"]);
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadCache();
+  }
 
   @override
   void onReady() {

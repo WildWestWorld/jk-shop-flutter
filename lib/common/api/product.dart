@@ -54,4 +54,55 @@ class ProductApi {
     attributes.sort((a, b) => a.menuOrder!.compareTo(b.menuOrder as int));
     return attributes;
   }
+
+  /// 评论列表
+  static Future<List<ReviewModel>> reviews(ReviewsReq? req) async {
+    var res = await ApiOrginService.to.get(
+      '/products/reviews',
+      params: req?.toJson(),
+    );
+
+    res.data = [
+      {
+        "id": 12,
+        "date_created": "2022-04-04T23:36:23",
+        "date_created_gmt": "2022-04-04T15:36:23",
+        "product_id": 13,
+        "status": "approved",
+        "reviewer": "ducafecat5",
+        "reviewer_email": "ducafecat5@gmail.com",
+        "review": "<p>001 - Nice album!</p>\n",
+        "rating": 5,
+        "verified": false,
+        "reviewer_avatar_urls": {
+          "24":
+              "https://secure.gravatar.com/avatar/8b3a29ec6f524eed54bbf360e545fef8?s=24&d=mm&r=g",
+          "48":
+              "https://secure.gravatar.com/avatar/8b3a29ec6f524eed54bbf360e545fef8?s=48&d=mm&r=g",
+          "96":
+              "https://secure.gravatar.com/avatar/8b3a29ec6f524eed54bbf360e545fef8?s=96&d=mm&r=g"
+        },
+        "_links": {
+          "self": [
+            {
+              "href":
+                  "https://wp.ducafecat.tech/wp-json/wc/v3/products/reviews/12"
+            }
+          ],
+          "collection": [
+            {"href": "https://wp.ducafecat.tech/wp-json/wc/v3/products/reviews"}
+          ],
+          "up": [
+            {"href": "https://wp.ducafecat.tech/wp-json/wc/v3/products/13"}
+          ]
+        }
+      }
+    ];
+
+    List<ReviewModel> reviews = [];
+    for (var item in res.data) {
+      reviews.add(ReviewModel.fromJson(item));
+    }
+    return reviews;
+  }
 }

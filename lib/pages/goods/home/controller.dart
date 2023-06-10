@@ -207,7 +207,9 @@ class HomeController extends GetxController {
   void onTap() {}
 
   // 导航点击事件
-  void onAppBarTap() {}
+  void onAppBarTap() {
+    Get.toNamed(RouteNames.searchSearchIndex);
+  }
 
   @override
   void onInit() {

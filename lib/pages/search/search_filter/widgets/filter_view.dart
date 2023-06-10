@@ -5,6 +5,26 @@ import 'package:jk_shop/pages/index.dart';
 
 class FilterView extends GetView<SearchFilterController> {
   const FilterView({Key? key}) : super(key: key);
+  // 标题栏
+  Widget _buildTitle(String title) {
+    return JKText.body2(title).paddingBottom(AppSpace.listRow);
+  }
+
+  // 价格选择区间
+  Widget _buildPriceRange() {
+    return GetBuilder<SearchFilterController>(
+      id: "filter_price_range",
+      builder: (_) {
+        return PriceRangeWidget(
+          max: 5000,
+          min: 0,
+          values: controller.priceRange,
+          onDragging: controller.onPriceRangeDragging,
+        ).paddingBottom(AppSpace.listRow * 2);
+      },
+    );
+  }
+
 // 顶部 关闭
   Widget _buildTopBar() {
     return <Widget>[
@@ -31,6 +51,10 @@ class FilterView extends GetView<SearchFilterController> {
     return <Widget>[
       // 顶部
       _buildTopBar(),
+
+      // 价格
+      _buildTitle(LocaleKeys.searchFilterPrice.tr),
+      _buildPriceRange(),
     ]
         .toColumn(
           crossAxisAlignment: CrossAxisAlignment.start,

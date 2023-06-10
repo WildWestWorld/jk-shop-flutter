@@ -1,10 +1,12 @@
 import 'dart:html';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jk_shop/common/index.dart';
 
 class SearchFilterController extends GetxController {
   SearchFilterController();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   // 排序列表
   List<KeyValueModel> orderList = [
@@ -30,6 +32,16 @@ class SearchFilterController extends GetxController {
   void onOrderTap(KeyValueModel? val) {
     orderSelected = val!;
     update(["search_filter"]);
+  }
+
+  // 筛选 打开
+  void onFilterOpenTap() {
+    scaffoldKey.currentState?.openEndDrawer();
+  }
+
+  // 筛选 关闭
+  void onFilterCloseTap() {
+    Get.back();
   }
 
   // @override

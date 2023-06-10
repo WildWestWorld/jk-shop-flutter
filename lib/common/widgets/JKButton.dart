@@ -14,6 +14,7 @@ enum JKButtonType {
   iconTextOutlined, // 图标/文字/边框
   iconTextUpDownOutlined, // 图标/文字/上下/边框
   textIcon, // 文字/图标
+  dropdown, // 文字/图标/两端对齐
 }
 
 /// 按钮
@@ -287,6 +288,36 @@ class JKButton extends StatelessWidget {
         ]),
         super(key: key);
 
+  /// 文字 / 图标 / dropdown
+  JKButton.dropdown(
+    this.text,
+    this.icon, {
+    Key? key,
+    Color? textColor,
+    double? textSize,
+    FontWeight? textWeight,
+    this.type = JKButtonType.dropdown,
+    this.onTap,
+    this.borderRadius = 0,
+    this.backgroundColor,
+    this.borderColor,
+    this.width,
+    this.height,
+  })  : child = <Widget>[
+          JKText.button(
+            text: text!,
+            size: textSize,
+            color: textColor ?? AppColors.onPrimaryContainer,
+            weight: textWeight,
+          ).expanded(),
+          icon!,
+        ]
+            .toRow(
+              mainAxisSize: MainAxisSize.min,
+            )
+            .paddingHorizontal(AppSpace.button),
+        super(key: key);
+
   // 背景
   MaterialStateProperty<Color?>? get _backgroundColor {
     switch (type) {
@@ -307,6 +338,7 @@ class JKButton extends StatelessWidget {
         ));
       case JKButtonType.iconTextOutlined:
       case JKButtonType.iconTextUpDownOutlined:
+      case JKButtonType.dropdown:
         return MaterialStateProperty.all(BorderSide(
           color: borderColor ?? AppColors.outline,
           width: 1,
@@ -346,6 +378,7 @@ class JKButton extends StatelessWidget {
                 Radius.circular(borderRadius ?? AppRadius.buttonTextFilled)),
           ),
         );
+      case JKButtonType.dropdown:
       case JKButtonType.textRoundFilled:
         return MaterialStateProperty.all(
           RoundedRectangleBorder(

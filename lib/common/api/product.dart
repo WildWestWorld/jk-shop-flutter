@@ -105,4 +105,18 @@ class ProductApi {
     }
     return reviews;
   }
+
+  /// tags 列表
+  static Future<List<TagModel>> tags(TagsReq? req) async {
+    var res = await ApiOrginService.to.get(
+      '/products/tags',
+      params: req?.toJson(),
+    );
+
+    List<TagModel> tags = [];
+    for (var item in res.data) {
+      tags.add(TagModel.fromJson(item));
+    }
+    return tags;
+  }
 }

@@ -15,5 +15,6 @@ export 'response/category_model/category_model.dart';
 export 'response/product_model/product_model.dart';
 export 'response/attribute_model/attribute_model.dart';
 export 'response/review_model/review_model.dart';
+export 'response/tag_model/tag_model.dart';
 
 export './key_value/kv.dart';

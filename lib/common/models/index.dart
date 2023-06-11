@@ -17,4 +17,11 @@ export 'response/attribute_model/attribute_model.dart';
 export 'response/review_model/review_model.dart';
 export 'response/tag_model/tag_model.dart';
 
+export 'response/order_model/order_model.dart';
+export 'response/order_model/billing.dart';
+export 'response//order_model/shipping.dart';
+
+export 'response/continents_model/continents_model.dart';
+export 'response/continents_model/country.dart';
+
 export './key_value/kv.dart';

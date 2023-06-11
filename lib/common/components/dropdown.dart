@@ -34,22 +34,22 @@ class DropdownWidget extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildView() {
-    // final focusNode = FocusNode();
+    final focusNode = FocusNode();
 
     final overlayColor = MaterialStateProperty.resolveWith<Color?>(
       (Set<MaterialState> states) {
-        if (states.contains(MaterialState.focused)) {
-          // 设置聚焦状态下的覆盖颜色
-          return Colors.transparent;
-        }
-        if (states.contains(MaterialState.hovered)) {
-          // 设置悬停状态下的覆盖颜色
-          return Colors.transparent;
-        }
-        if (states.contains(MaterialState.pressed)) {
-          // 设置按下状态下的覆盖颜色
-          return Colors.transparent;
-        }
+        // if (states.contains(MaterialState.focused)) {
+        //   // 设置聚焦状态下的覆盖颜色
+        //   return Colors.transparent;
+        // }
+        // if (states.contains(MaterialState.hovered)) {
+        //   // 设置悬停状态下的覆盖颜色
+        //   return Colors.transparent;
+        // }
+        // if (states.contains(MaterialState.pressed)) {
+        //   // 设置按下状态下的覆盖颜色
+        //   return Colors.transparent;
+        // }
         // 默认颜色
         return null;
       },
@@ -57,7 +57,7 @@ class DropdownWidget extends StatelessWidget {
 
     return DropdownButtonHideUnderline(
       child: DropdownButton2<KeyValueModel>(
-          // focusNode: focusNode,
+          focusNode: focusNode,
 
           // 扩展
           isExpanded: true,
@@ -80,12 +80,12 @@ class DropdownWidget extends StatelessWidget {
           value: selectedValue,
           // 改变事件
           onChanged: onChanged,
-          // onMenuStateChange: (isOpen) {
-          //   print(isOpen);
-          //   if (!isOpen) {
-          //     focusNode.unfocus();
-          //   }
-          // },
+          onMenuStateChange: (isOpen) {
+            print(isOpen);
+            if (!isOpen) {
+              focusNode.unfocus();
+            }
+          },
           iconStyleData: IconStyleData(
             icon: JKIcon.icon(
               Icons.expand_more,
@@ -94,6 +94,8 @@ class DropdownWidget extends StatelessWidget {
           ),
           buttonStyleData: ButtonStyleData(
             overlayColor: overlayColor,
+            // 必须写这个颜色 不然就有Force BUG
+            decoration: const BoxDecoration(color: Colors.transparent),
             // 按钮 padding
             padding: buttonPadding ??
                 EdgeInsets.symmetric(horizontal: AppSpace.iconTextSmail),

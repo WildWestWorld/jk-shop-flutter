@@ -1,15 +1,157 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jk_shop/common/index.dart';
 
 import 'index.dart';
 
 class MyIndexPage extends GetView<MyIndexController> {
   const MyIndexPage({Key? key}) : super(key: key);
 
+  // 顶部 APP 导航栏
+  Widget _buildAppBar() {
+    return SliverAppBar(
+      // 背景色
+      backgroundColor: Colors.transparent,
+      // 固定在顶部
+      pinned: true,
+      // 浮动在顶部
+      floating: true,
+      // 自动弹性显示
+      snap: true,
+      // 是否应拉伸以填充过度滚动区域。
+      stretch: true,
+      // 高度
+      expandedHeight: 280.h,
+      // 此小组件堆叠在工具栏和选项卡栏后面。其高度将与应用栏的整体高度相同。
+      flexibleSpace: FlexibleSpaceBar(
+        // // 折叠模式
+        // collapseMode: CollapseMode.parallax,
+        // // 折叠动画
+        // stretchModes: const [
+        //   // 模糊
+        //   StretchMode.blurBackground,
+        //   // 尺寸
+        //   StretchMode.zoomBackground,
+        //   // 标题动画
+        //   StretchMode.fadeTitle,
+        // ],
+        // 标题
+        // title: const TextWidget.navigation(text: "Ducafecat"),
+        // 背景
+        background: <Widget>[
+          // 背景图
+          <Widget>[
+            JKIcon.svg(
+              AssetsSvgs.profileHeaderBackgroundSvg,
+              color: AppColors.primaryContainer,
+              fit: BoxFit.cover,
+            ).expanded(),
+            // const ImageWidget.(
+            //   AssetsImages.profileBackgroundPng,
+            //   fit: BoxFit.cover,
+            // ).expanded(),
+          ].toColumn(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+          ),
+
+          // 内容
+          <Widget>[
+            // 用户信息
+            <Widget>[
+              // 头像
+              JKImage.url(
+                // 测试需要改成自定义头像
+                "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201810%2F13%2F20181013234104_hxaco.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1688954210&t=924c89d77494c602e9c5957a47f2e61d",
+                width: 100.w,
+                height: 100.w,
+                fit: BoxFit.fill,
+                radius: 50.w,
+              ).paddingRight(AppSpace.listItem),
+
+              // 称呼
+              JKText.title1(
+                "${UserService.to.profile.username}",
+                color: AppColors.primary,
+                size: 26.sp,
+              ),
+            ].toRow().paddingHorizontal(AppSpace.card),
+
+            // 功能栏位
+            <Widget>[
+              // 1
+              BarItemWidget(
+                title: LocaleKeys.myTabWishlist.tr,
+                svgPath: AssetsSvgs.iLikeSvg,
+              ),
+              // 2
+              BarItemWidget(
+                title: LocaleKeys.myTabFollowing.tr,
+                svgPath: AssetsSvgs.iAddFriendSvg,
+              ),
+              // 3
+              BarItemWidget(
+                title: LocaleKeys.myTabVoucher.tr,
+                svgPath: AssetsSvgs.iCouponSvg,
+              ),
+            ]
+                .toRow(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                )
+                .paddingAll(AppSpace.card)
+                .card()
+                .paddingHorizontal(AppSpace.page),
+          ].toColumn(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),
+        ].toStack(),
+      ),
+    );
+  }
+
+  // My Order
+  Widget _buildMyOrder() {
+    return Text("My Order");
+  }
+
+  // 按钮列表
+  Widget _buildButtonsList() {
+    return Text("按钮列表");
+  }
+
   // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("MyIndexPage"),
+    return CustomScrollView(
+      slivers: <Widget>[
+        // 顶部 APP 导航栏
+        _buildAppBar(),
+        // My Order
+        _buildMyOrder().sliverBox,
+        // 按钮列表
+        _buildButtonsList().sliverBox,
+
+        // 注销
+        JKButton.primary(
+          LocaleKeys.myBtnLogout.tr,
+          height: 60,
+        )
+            .padding(
+              left: AppSpace.page,
+              right: AppSpace.page,
+              bottom: AppSpace.listRow * 2,
+            )
+            .sliverBox,
+
+        // 版权
+        const JKText.body2(
+          "Code by: https://ducafefcat.tech",
+        ).alignCenter().paddingBottom(AppSpace.listRow).sliverBox,
+
+        // 版本号
+        JKText.body2(
+          "v ${ConfigService.to.version}",
+        ).alignCenter().paddingBottom(200).sliverBox,
+      ],
     );
   }
 
@@ -20,10 +162,7 @@ class MyIndexPage extends GetView<MyIndexController> {
       id: "my_index",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("my_index")),
-          body: SafeArea(
-            child: _buildView(),
-          ),
+          body: _buildView(),
         );
       },
     );

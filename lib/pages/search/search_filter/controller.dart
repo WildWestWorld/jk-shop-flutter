@@ -38,6 +38,21 @@ class SearchFilterController extends GetxController {
   // 选中颜色列表
   List<String> colorKeys = [];
 
+  // 星级
+  int starValue = -1;
+
+  // Brand
+  List<KeyValueModel<AttributeModel>> brands = [];
+  List<String> brandKeys = [];
+
+  // Gender
+  List<KeyValueModel<AttributeModel>> genders = [];
+  List<String> genderKeys = [];
+
+  // Condition
+  List<KeyValueModel<AttributeModel>> conditions = [];
+  List<String> conditionKeys = [];
+
   _initData() {
     update(["search_filter"]);
   }
@@ -95,6 +110,37 @@ class SearchFilterController extends GetxController {
         return KeyValueModel(key: "${arrt.name}", value: arrt);
       }).toList();
     }
+
+    // 品牌列表
+    {
+      String result =
+          Storage().getString(Constants.storageProductsAttributesBrand);
+      brands = jsonDecode(result).map<KeyValueModel<AttributeModel>>((item) {
+        var arrt = AttributeModel.fromJson(item);
+        return KeyValueModel(key: "${arrt.name}", value: arrt);
+      }).toList();
+    }
+
+    // 性别列表
+    {
+      String result =
+          Storage().getString(Constants.storageProductsAttributesGender);
+      genders = jsonDecode(result).map<KeyValueModel<AttributeModel>>((item) {
+        var arrt = AttributeModel.fromJson(item);
+        return KeyValueModel(key: "${arrt.name}", value: arrt);
+      }).toList();
+    }
+
+    // 新旧列表
+    {
+      String result =
+          Storage().getString(Constants.storageProductsAttributesCondition);
+      conditions =
+          jsonDecode(result).map<KeyValueModel<AttributeModel>>((item) {
+        var arrt = AttributeModel.fromJson(item);
+        return KeyValueModel(key: "${arrt.name}", value: arrt);
+      }).toList();
+    }
   }
 
   // 尺寸选中
@@ -107,6 +153,30 @@ class SearchFilterController extends GetxController {
   void onColorTap(List<String> keys) {
     colorKeys = keys;
     update(["filter_colors"]);
+  }
+
+  // 星级选中
+  void onStarTap(int value) {
+    starValue = value;
+    update(["filter_stars"]);
+  }
+
+  // 品牌选中
+  void onBrandTap(List<String> keys) {
+    brandKeys = keys;
+    update(["filter_brands"]);
+  }
+
+  // 性别选中
+  void onGenderTap(List<String> keys) {
+    genderKeys = keys;
+    update(["filter_genders"]);
+  }
+
+  // 新旧选中
+  void onConditionTap(List<String> keys) {
+    conditionKeys = keys;
+    update(["filter_conditions"]);
   }
 
   @override

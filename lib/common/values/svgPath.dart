@@ -38,4 +38,5 @@ class AssetsSvgs {
   static const pTranslateSvg = 'assets/svgs/p-translate.svg';
   static const profileHeaderBackgroundSvg =
       'assets/svgs/profile-header-background.svg';
+  static const pThemeSvg = 'assets/svgs/p-theme.svg';
 }

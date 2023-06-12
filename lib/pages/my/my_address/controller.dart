@@ -32,29 +32,15 @@ class MyAddressController extends GetxController {
   // 国家选择
   List<int> countrySels = [];
 
+  // 洲省数据
+  List<KeyValueModel> statesList = [];
+  // 洲省市选择
+  List<int> statesSels = [];
+
   // 初始化
   Future<void> _initData() async {
     // 拉取 大陆国家数据
     await _fetchContinents();
-
-    // 国家代码
-    String countryCode = countryController.text;
-
-    // 国家选着器 - 选中 index
-    for (var i = 0; i < continents.length; i++) {
-      // 大陆
-      var continent = continents[i];
-      // 检查是否有选中的国家
-      int iCountryIndex =
-          continent.countries?.indexWhere((el) => el.code == countryCode) ?? 0;
-      if (iCountryIndex > 0) {
-        countrySels = [
-          i,
-          iCountryIndex,
-        ];
-        break;
-      }
-    }
 
     // 用户数据初始
     UserProfileModel profile = UserService.to.profile;
@@ -81,6 +67,32 @@ class MyAddressController extends GetxController {
       countryController.text = profile.shipping?.country ?? "";
       statesController.text = profile.shipping?.state ?? "";
     }
+
+    // 国家代码
+    String countryCode = countryController.text;
+
+    // 国家选着器 - 选中 index
+    for (var i = 0; i < continents.length; i++) {
+      // 大陆
+      var continent = continents[i];
+      // 检查是否有选中的国家
+      int iCountryIndex =
+          continent.countries?.indexWhere((el) => el.code == countryCode) ?? 0;
+      if (iCountryIndex > 0) {
+        countrySels = [
+          i,
+          iCountryIndex,
+        ];
+        break;
+      }
+    }
+
+    // 洲省代码
+    String statesCode = statesController.text;
+    // 洲选择器数据
+    _filterStates(countryCode);
+    // 洲省选择器 - 选中 index
+    statesSels = [statesList.indexWhere((el) => el.key == statesCode)];
 
     update(["my_address"]);
   }
@@ -164,7 +176,46 @@ class MyAddressController extends GetxController {
         if (value.isEmpty) return;
         if (value.length == 2) {
           countryController.text = '${value[1].key}';
+          _filterStates(value[1].key); // 刷新洲数据
         }
+      },
+    );
+  }
+
+  // 取洲省数据
+  void _filterStates(String countryCode) {
+    for (var i = 0; i < continents.length; i++) {
+      var continent = continents[i];
+      var country =
+          continent.countries!.firstWhereOrNull((el) => el.code == countryCode);
+      if (country != null) {
+        statesList = List.generate(country.states?.length ?? 0, (index) {
+          var state = country.states?.elementAt(index);
+          return KeyValueModel<String>(
+            key: state?.code ?? "-",
+            value: state?.name ?? "-",
+          );
+        });
+        break;
+      }
+    }
+  }
+
+  // 洲省市选择
+  void onStatesPicker() async {
+    ActionBottomSheet.data(
+      title: 'States',
+      context: Get.context!,
+      // 数据
+      adapter: PickerDataAdapter<KeyValueModel>(
+        pickerData: statesList,
+      ),
+      // 默认选中 [index]
+      selecteds: statesSels,
+      // 确认回调
+      onConfirm: (value) {
+        if (value.isEmpty) return;
+        statesController.text = '${value[0].key}';
       },
     );
   }

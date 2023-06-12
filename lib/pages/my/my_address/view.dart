@@ -60,6 +60,16 @@ class MyAddressPage extends GetView<MyAddressController> {
           ),
 
           // State
+          JKTextForm(
+            onTap: controller.onStatesPicker,
+            readOnly: true,
+            isMustBeEnter: true,
+            controller: controller.statesController,
+            labelText: LocaleKeys.addressState.tr,
+            validator: Validatorless.multiple([
+              Validatorless.required("The field is obligatory"),
+            ]),
+          ),
 
           // Post Code
           JKTextForm(

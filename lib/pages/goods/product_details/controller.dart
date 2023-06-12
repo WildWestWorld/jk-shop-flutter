@@ -12,6 +12,11 @@ class ProductDetailsController extends GetxController
     with GetSingleTickerProviderStateMixin {
   ProductDetailsController();
 
+  // 主界面 刷新控制器
+  final RefreshController mainRefreshController = RefreshController(
+    initialRefresh: true,
+  );
+
   // 商品 id , 获取路由传递参数
   int? productId = Get.arguments['id'] ?? 0;
   // 商品详情
@@ -243,6 +248,42 @@ class ProductDetailsController extends GetxController
     ));
   }
 
+  // main 下拉刷新
+  void onMainRefresh() async {
+    try {
+      // 拉取商品详情
+      await _loadProduct();
+      // 刷新数据
+      mainRefreshController.refreshCompleted();
+    } catch (error) {
+      // 刷新失败
+      mainRefreshController.refreshFailed();
+    }
+    update(["product_details"]);
+  }
+
+  // 加入购物车
+  void onAddCartTap() async {
+    // 检查是否登录
+    if (!await UserService.to.checkIsLogin()) {
+      return;
+    }
+
+    // 检查空
+    if (product == null || product?.id == null) {
+      Loading.error("product is empty");
+      return;
+    }
+
+    // 加入购物车
+    CartService.to.addCart(LineItem(
+      productId: productId,
+      product: product,
+    ));
+    // 返回、或者去购物车
+    Get.back();
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -259,8 +300,9 @@ class ProductDetailsController extends GetxController
   void onClose() {
     super.onClose();
     tabController.dispose();
-
     // 释放 评论下拉控制器
     reviewsRefreshController.dispose();
+    // 销毁 主下拉控制器
+    mainRefreshController.dispose();
   }
 }

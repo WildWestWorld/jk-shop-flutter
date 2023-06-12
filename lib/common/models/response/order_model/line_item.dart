@@ -1,3 +1,5 @@
+import 'package:jk_shop/common/models/response/product_model/product_model.dart';
+
 import 'product.dart';
 
 class LineItem {
@@ -14,9 +16,9 @@ class LineItem {
   List<dynamic>? taxes;
   List<dynamic>? metaData;
   String? sku;
-  int? price;
+  double? price;
   dynamic parentName;
-  Product? product;
+  ProductModel? product;
 
   LineItem({
     this.id,
@@ -51,11 +53,11 @@ class LineItem {
         taxes: json['taxes'] as List<dynamic>?,
         metaData: json['meta_data'] as List<dynamic>?,
         sku: json['sku'] as String?,
-        price: json['price'] as int?,
+        price: double.parse(json['price'].toString()),
         parentName: json['parent_name'] as dynamic,
         product: json['product'] == null
             ? null
-            : Product.fromJson(json['product'] as Map<String, dynamic>),
+            : ProductModel.fromJson(json['product'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {

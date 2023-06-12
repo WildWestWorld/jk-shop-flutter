@@ -52,6 +52,8 @@ class Global {
       //初始化Axios 服务
       Get.put<ApiOrginService>(ApiOrginService());
       Get.put<UserService>(UserService());
+
+      Get.put<CartService>(CartService());
     });
   }
 

@@ -13,7 +13,10 @@ class CartIndexPage extends GetView<CartIndexController> {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         LineItem item = CartService.to.lineItems[index];
-        return Text(item.product?.name ?? "").paddingAll(AppSpace.card).card();
+        // 购物车项
+        return CartItem(
+          lineItem: item,
+        ).paddingAll(AppSpace.card).card();
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: AppSpace.listRow);
@@ -105,7 +108,8 @@ class CartIndexPage extends GetView<CartIndexController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CartIndexController>(
-      init: CartIndexController(),
+      // init: CartIndexController(),
+      init: Get.find<CartIndexController>(),
       id: "cart_index",
       builder: (_) {
         return Scaffold(

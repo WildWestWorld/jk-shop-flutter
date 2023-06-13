@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 import 'common/index.dart';
+import 'pages/index.dart';
 
 class Global {
   static Future<void> init() async {

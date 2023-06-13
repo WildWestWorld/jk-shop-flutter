@@ -15,6 +15,8 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage>
     with AutomaticKeepAliveClientMixin {
+  // final MainController mainController = Get.put(MainController());
+
   @override
   bool get wantKeepAlive => true;
 

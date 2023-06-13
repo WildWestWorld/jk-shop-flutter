@@ -6,8 +6,29 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'index.dart';
 
-class HomePage extends GetView<HomeController> {
+/// 商品首页
+/// AutomaticKeepAliveClientMixin 保持页面状态
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return const _HomePageGetX();
+  }
+}
+
+class _HomePageGetX extends GetView<HomeController> {
+  const _HomePageGetX({Key? key}) : super(key: key);
 
   // 导航栏
   AppBar _buildAppBar() {
@@ -182,8 +203,8 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(),
-      // init: Get.find<HomeController>(),
+      // init: HomeController(),
+      init: Get.find<HomeController>(),
 
       id: "home",
       builder: (_) {

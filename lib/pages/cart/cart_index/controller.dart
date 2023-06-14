@@ -82,6 +82,12 @@ class CartIndexController extends GetxController {
     update(["cart_index"]);
   }
 
+  // 修改订单数量
+  Future<void> onChangeQuantity(LineItem item, int quantity) async {
+    CartService.to.changeQuantity(item.productId!, quantity);
+    update(["cart_index"]);
+  }
+
   // @override
   // void onInit() {
   //   super.onInit();

@@ -51,6 +51,27 @@ class CartIndexController extends GetxController {
     update(["cart_index"]);
   }
 
+  // 应用优惠券, 568935ab
+  Future<void> onApplyCoupon() async {
+    if (couponCode.isEmpty) {
+      Loading.error("Voucher code empty.");
+      return;
+    }
+    CouponsModel? coupon = await CouponApi.couponDetail(couponCode);
+    if (coupon != null) {
+      couponCode = "";
+      bool isSuccess = CartService.to.applyCoupon(coupon);
+      if (isSuccess) {
+        Loading.success("Coupon applied.");
+      } else {
+        Loading.error("Coupon is already applied.");
+      }
+      update(["cart_index"]);
+    } else {
+      Loading.error("Coupon code is not valid.");
+    }
+  }
+
   // 删除购物车订单
   Future<void> onOrderCancel() async {
     for (var i = 0; i < selectedIds.length; i++) {

@@ -25,4 +25,6 @@ export 'response/order_model/line_item.dart';
 export 'response/continents_model/continents_model.dart';
 export 'response/continents_model/country.dart';
 
+export 'response/coupons_model/coupons_model.dart';
+
 export './key_value/kv.dart';

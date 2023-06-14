@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jk_shop/common/index.dart';
+import 'package:jk_shop/pages/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 // GetSingleTickerProviderStateMixin 是 TickerProvider 的实现，
@@ -282,6 +283,25 @@ class ProductDetailsController extends GetxController
     ));
     // 返回、或者去购物车
     Get.back();
+  }
+
+  // 立刻购买 checkout
+  void onCheckoutTap() async {
+    // 检查是否登录
+    if (!await UserService.to.checkIsLogin()) {
+      return;
+    }
+
+    // 检查空
+    if (product == null || product?.id == null) {
+      Loading.error("product is empty");
+      return;
+    }
+
+    // 立刻购买 checkout
+    ActionBottomSheet.barModel(
+      BuyNowPage(product: product!),
+    );
   }
 
   @override

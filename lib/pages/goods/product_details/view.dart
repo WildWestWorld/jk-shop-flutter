@@ -170,6 +170,8 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
       // 立刻购买
       JKButton.primary(
         LocaleKeys.gDetailBtnBuy.tr,
+        // 点击弹出购买窗口
+        onTap: controller.onCheckoutTap,
       ).expanded(),
     ]
         .toRow(

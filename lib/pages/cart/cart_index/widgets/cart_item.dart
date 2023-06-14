@@ -16,9 +16,13 @@ class CartItem extends StatelessWidget {
   /// 选中事件
   final Function(bool)? onSelect;
 
+  /// 是否全选
+  final bool isSelected;
+
   const CartItem({
     Key? key,
     required this.lineItem,
+    required this.isSelected,
     this.onChangeQuantity,
     this.onSelect,
   }) : super(key: key);
@@ -29,6 +33,15 @@ class CartItem extends StatelessWidget {
     ProductModel product = lineItem.product!;
 
     return <Widget>[
+      // 单选框
+      JKCheckBox.all(
+        isSelected,
+        onSelect,
+        fontColor: AppColors.primary,
+        bgColorChecked: AppColors.primaryContainer,
+        size: 20.sp,
+      ).paddingRight(AppSpace.iconTextSmail),
+
       // 图片
       JKImage.url(
         Convert.aliImageResize(

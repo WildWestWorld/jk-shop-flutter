@@ -66,6 +66,7 @@ class TabProductView extends GetView<ProductDetailsController> {
       ].toRow(),
     ]
         .toColumn(crossAxisAlignment: CrossAxisAlignment.start)
+        .scrollable()
         .paddingVertical(AppSpace.page);
   }
 }

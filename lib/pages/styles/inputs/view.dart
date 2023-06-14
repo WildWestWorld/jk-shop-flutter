@@ -58,6 +58,33 @@ class InputsPage extends GetView<InputsController> {
               hintText: "搜索",
             )).paddingOnly(bottom: AppSpace.listRow),
 
+        /// 选择框
+        JKCheckBox(
+          value: controller.checkVal,
+          onChanged: controller.onCheckBox,
+        ).width(300).paddingBottom(AppSpace.listRow),
+
+        /// 选择框 all
+        JKCheckBox.all(
+          controller.checkVal,
+          controller.onCheckBox,
+          label: const JKText.title3("全选"),
+        ).width(300).paddingBottom(AppSpace.listRow),
+
+        /// 选择框 single
+        JKCheckBox.single(
+          controller.checkVal,
+          controller.onCheckBox,
+          label: const JKText.title3("行选择"),
+        ).width(300).paddingBottom(AppSpace.listRow),
+
+        /// 选择框 radio
+        JKCheckBox.radio(
+          controller.checkVal,
+          controller.onCheckBox,
+          label: const JKText.body1("radio"),
+        ).width(300).paddingBottom(AppSpace.listRow),
+
         // end
       ],
     );

@@ -12,13 +12,29 @@ class BuyNowController extends GetxController {
     AssetsImages.pPaypalPng,
   ];
 
+  // 送货地址
+  String shippingAddress = "";
+
+  // 初始
   _initData() {
+    shippingAddress = UserService.to.shipping;
+
     update(["buy_now"]);
   }
 
   void onTap() {}
   // 下单 checkout
   void onCheckout() async {}
+
+  // goto 送货地址修改
+  Future<void> onShippingTap() async {
+    var result = await Get.toNamed(RouteNames.myMyAddress,
+        arguments: {"type": "Shipping"});
+    if (result != null && result == true) {
+      shippingAddress = UserService.to.shipping;
+      update(["buy_now"]);
+    }
+  }
   // @override
   // void onInit() {
   //   super.onInit();

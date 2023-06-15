@@ -45,8 +45,32 @@ class BuyNowController extends GetxController {
   }
 
   void onTap() {}
+
   // 下单 checkout
-  void onCheckout() async {}
+  void onCheckout() async {
+    // 商品 LineItem
+    List<LineItem> lineItems = [
+      LineItem(
+        productId: product.id,
+        quantity: quantity,
+      ),
+    ];
+
+    // 提交订单
+    OrderModel res = await OrderApi.crateOrder(
+      lineItem: lineItems,
+      lineCoupons: lineCoupons,
+    );
+
+    // 交易成功
+    if (res.id != null) {
+      // 提示
+      Loading.success("Order created.");
+
+      // goto 成功界面
+      Get.offNamed(RouteNames.cartBuyDone, arguments: res);
+    }
+  }
 
   // 使用优惠券
   bool _applyCoupon(CouponsModel item) {

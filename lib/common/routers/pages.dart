@@ -15,10 +15,10 @@ class RoutePages {
         page: () => const MainPage(),
         // binding用于懒加载
         binding: MainBinding()),
-    GetPage(
-      name: RouteNames.cartApplyPromoCode,
-      page: () => const ApplyPromoCodePage(),
-    ),
+    // GetPage(
+    //   name: RouteNames.cartApplyPromoCode,
+    //   page: () => const ApplyPromoCodePage(),
+    // ),
     GetPage(
       name: RouteNames.cartBuyDone,
       page: () => const BuyDonePage(),

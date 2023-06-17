@@ -113,17 +113,99 @@ class OrderDetailsPage extends GetView<OrderDetailsController> {
 
   // 寄件地、目的地
   Widget _buildBillAddress() {
-    return const Text("寄件地、目的地");
+    return <Widget>[
+      // Bill From, 商家发货地址写死
+      BuildBillAddress(
+        title: LocaleKeys.orderDetailsBillFrom.tr,
+        address: "Adidas Shoes",
+        city: "Kingston",
+        state: "New York",
+        country: "United States",
+        phone: "+44-213 543 230",
+      ).expanded(),
+
+      // 间距
+      SizedBox(
+        width: AppSpace.iconTextMedium,
+      ),
+
+      // Bill To
+      BuildBillAddress(
+        title: LocaleKeys.orderDetailsBillTo.tr,
+        address: controller.order.shipping?.address1,
+        city: controller.order.shipping?.city,
+        state: controller.order.shipping?.state,
+        country: controller.order.shipping?.country,
+        phone: controller.order.billing?.phone,
+      ).expanded(),
+    ].toRow().paddingAll(AppSpace.card).card().paddingBottom(AppSpace.listRow);
   }
 
   // 商品列表
   Widget _buildProductsList() {
-    return const Text("商品列表");
+    return BuildProductList(
+      lineItems: controller.order.lineItems ?? [],
+      currencySymbol: controller.order.currencySymbol,
+    ).paddingAll(AppSpace.card).card().paddingBottom(AppSpace.listRow);
   }
 
   // 小计
   Widget _buildTotal() {
-    return const Text("小计");
+    return <Widget>[
+      // 左侧
+      <Widget>[
+        // Payment Method
+        JKText.body1(LocaleKeys.orderDetailsPaymentMethod.tr),
+
+        // VISA Card Payment
+        const JKText.body2("VISA Card Payment"),
+
+        // Balance 余额
+        BuildTotalItem(
+          title: LocaleKeys.orderDetailsBalance.tr,
+          currencySymbol: controller.order.currencySymbol,
+          price: "0",
+        ),
+      ]
+          .toColumn(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+          )
+          .expanded(),
+
+      // 间距
+      SizedBox(
+        width: AppSpace.iconTextMedium,
+      ),
+
+      // 右侧
+      <Widget>[
+        // Total
+        BuildTotalItem(
+          title: LocaleKeys.orderDetailsTotal.tr,
+          currencySymbol: controller.order.currencySymbol,
+          price: controller.order.total,
+        ),
+
+        // Shipping
+        BuildTotalItem(
+          title: LocaleKeys.orderDetailsShipping.tr,
+          currencySymbol: controller.order.currencySymbol,
+          price: controller.order.shippingTotal,
+        ),
+
+        // Discount
+        BuildTotalItem(
+          title: LocaleKeys.orderDetailsDiscount.tr,
+          currencySymbol: controller.order.currencySymbol,
+          price: controller.order.discountTotal,
+        ),
+      ]
+          .toColumn(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          )
+          .expanded(),
+    ].toRow().height(100).paddingAll(AppSpace.card).card();
   }
 
   // 主视图

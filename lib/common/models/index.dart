@@ -9,6 +9,7 @@ export './token/user_token.dart';
 export 'request/user_register_req.dart';
 export 'request/user_login_req.dart';
 export 'request/product_req.dart';
+export 'request/order_req.dart';
 
 export 'response/user_profile/user_profile.dart';
 export 'response/category_model/category_model.dart';

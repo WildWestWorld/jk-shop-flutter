@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
+import 'package:jk_shop/common/index.dart';
 
 class OrderDetailsController extends GetxController {
   OrderDetailsController();
+
+  // 订单详情
+  final OrderModel order = Get.arguments as OrderModel;
 
   _initData() {
     update(["order_details"]);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jk_shop/common/index.dart';
 
-import '../index.dart';
 
 /// 标签列表组件
 class TagsListWidget extends StatelessWidget {

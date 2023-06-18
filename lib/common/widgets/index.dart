@@ -12,3 +12,5 @@ export './JKNavgationBar.dart';
 export './JKIconText.dart';
 export './JKCheckBox.dart';
 export './JKQuantity.dart';
+
+export './JKDialog.dart';

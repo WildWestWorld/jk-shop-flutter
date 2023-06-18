@@ -85,6 +85,12 @@ dependencies:
   flutter_picker: ^2.1.0
   # 底部弹出Model框 必须设置版本为 ^3.0.0-pre  不然会有报错
   modal_bottom_sheet: ^3.0.0-pre
+  # 权限控制 例如相机/位置 权限 （使用后必须要到 原生去配置）
+  permission_handler: ^10.3.0
+  # 微信资源选择
+  wechat_assets_picker: ^8.5.0
+  # 微信相机选择
+  wechat_camera_picker: ^3.8.0
 
 dev_dependencies:
   flutter_test:

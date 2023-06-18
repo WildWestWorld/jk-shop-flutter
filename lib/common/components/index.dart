@@ -19,3 +19,4 @@ export './stars_list.dart';
 export './bottom_sheet.dart';
 export './picker.dart';
 export './steps.dart';
+export './picker_image.dart';

@@ -21,6 +21,15 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
+// 定义属性读取对象，读取 android/key.properties
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -30,7 +39,8 @@ android {
 
     // compileSdkVersion flutter.compileSdkVersion
     compileSdkVersion 33
-    ndkVersion flutter.ndkVersion
+//    ndkVersion flutter.ndkVersion
+    ndkVersion "25.2.9519653"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -55,17 +65,42 @@ android {
         // targetSdkVersion flutter.targetSdkVersion
 
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 33
+
 
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+
+    // 签名配置
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+//    configurations {
+//        all {
+//            exclude group: 'org.bouncycastle', module: 'bcprov-jdk18on'
+//        }
+//    }
+
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
+
+            release {
+                signingConfig signingConfigs.release
+                ndk.debugSymbolLevel = 'FULL'
+            }
+
         }
     }
 }
